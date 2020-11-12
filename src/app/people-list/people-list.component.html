@@ -17,13 +17,18 @@
     <td>
       {{ person.name }}
     </td>
-    <td (click)="contacts(person.id)">
+    <td>
         {{ person.contacts.length }}
     </td>
     <td>
         <button type="button" class="btn btn-primary" (click)="contacts(person.id)"><fa-icon [icon]="faList"></fa-icon></button>
         <button type="button" class="btn btn-primary" (click)="edit(person.id)"><fa-icon [icon]="faPen"></fa-icon></button>
         <button type="button" class="btn btn-danger" (click)="delete(person.id)"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
+    </td>
+  </tr>
+  <tr *ngIf="peopleList.length == 0">
+    <td colspan="3">
+       Nenhum contato encontrado
     </td>
   </tr>
   </tbody>

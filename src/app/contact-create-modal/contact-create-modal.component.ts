@@ -9,11 +9,11 @@ import { ContactService } from '../services/contact.service';
 })
 export class ContactCreateModalContent implements OnInit {
   @Input() id;
+  @Input() personId;
   contact = { id: null, contact_value: '', type: {}, personId: 25 };
   contactForm;
   modalTitle = "Criar Contato";
   contactTypeList = [];
-
   constructor(
     public activeModal: NgbActiveModal,
     private contactService: ContactService) {
@@ -30,7 +30,7 @@ export class ContactCreateModalContent implements OnInit {
       "id": this.contact.id,
       "type": this.contact.type,
       "value": this.contact.contact_value,
-      "personId": 25
+      "personId": this.personId
     };
     
     this.contactService.create(payload).subscribe((data) => {

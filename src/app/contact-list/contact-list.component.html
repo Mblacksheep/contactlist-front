@@ -23,6 +23,11 @@
                     <button type="button" class="btn btn-danger" (click)="delete(contact.id)"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
                 </td>
             </tr>
+            <tr *ngIf="contactList.length == 0">
+                <td colspan="3">
+                   Nenhum contato encontrado
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>

@@ -54,6 +54,7 @@ export class ContactListComponent implements OnInit {
 
   create() {
     const modalRef = this.modalService.open(ContactCreateModalContent);
+    modalRef.componentInstance.personId = this.person.id;
     modalRef.dismissed.subscribe(() => {
       this.personContacts(this.person.id);
     })
@@ -61,6 +62,7 @@ export class ContactListComponent implements OnInit {
 
   edit(id) {
     const modalRef = this.modalService.open(ContactCreateModalContent);
+    modalRef.componentInstance.personId = this.person.id;
     modalRef.componentInstance.id = id;
     modalRef.dismissed.subscribe(() => {
       this.personContacts(this.person.id);
