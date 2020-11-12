@@ -29,6 +29,6 @@ export class ContactService {
     }
 
     getTypeList() {
-        return this.http.get<any>(environment.apiUrl + "contact-type");
+        return this.http.get<any>(environment.apiUrl + "contact-type/list");
     }
 } 

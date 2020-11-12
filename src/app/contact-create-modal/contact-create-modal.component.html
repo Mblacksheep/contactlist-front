@@ -1,19 +1,31 @@
 <div class="modal-header">
-    <h4 class="modal-title">{{ modalTitle }}</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-    </button>
+    {{ modalTitle }}
 </div>
 <div class="modal-body">
-    <form [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm.value)">
-        <div class="form-group">
-            <label for="contact-value">Contato</label>
-            <input type="text" class="form-control" id="contact-value" placeholder="Contato" formControlName="contact_value">
-        </div>
-        <!-- <div class="form-group">
-            <label for="name">Tipo</label>
-            <input type="text" class="form-control" id="name" placeholder="Nome do contato" formControlName="name">
-        </div> -->
-        <button type="submit" class="btn btn-primary">Salvar</button>
-    </form>
+    <div class="container">
+        <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+            <div class="form-group">
+                <label for="contact_value">Contato</label>
+                <input type="text" class="form-control" id="contact_value" required [(ngModel)]="contact.contact_value" name="contact_value" #contact_value="ngModel">
+                <div [hidden]="contact_value.valid || contact_value.pristine"
+                    class="alert alert-danger">
+                    Name is required
+                </div>
+            </div>
+
+            <div class="form-group">
+                <select class="form-control" id="type"
+                        required
+                        [(ngModel)]="contact.type" name="type"
+                        #type="ngModel">
+                    <option *ngFor="let type of contactTypeList" [value]="type.id">{{type.name}}</option>
+                </select>
+                <div [hidden]="type.valid || type.pristine" class="alert alert-danger">
+                    Power is required
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
+        </form>
+    </div>
 </div>

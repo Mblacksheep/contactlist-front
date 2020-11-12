@@ -9,34 +9,42 @@ import { ContactService } from '../services/contact.service';
 })
 export class ContactCreateModalContent implements OnInit {
   @Input() id;
-  contact;
+  contact = { id: null, contact_value: '', type: {}, personId: 25 };
   contactForm;
   modalTitle = "Criar Contato";
-  
+  contactTypeList = [];
+
   constructor(
     public activeModal: NgbActiveModal,
     private contactService: ContactService) {
-    this.contactForm = new FormGroup({
-      id: new FormControl(null),
-      contact_value: new FormControl(null),
+  }
+
+  getContactType() {
+    this.contactService.getTypeList().subscribe((data) => {
+      this.contactTypeList = data.contactTypeList;
     });
   }
 
-  onSubmit(contact) {
-    this.contactService.create(contact).subscribe((data) => {
+  onSubmit() {
+    var payload = {
+      "id": this.contact.id,
+      "type": this.contact.type,
+      "value": this.contact.contact_value,
+      "personId": 25
+    };
+    
+    this.contactService.create(payload).subscribe((data) => {
       this.activeModal.dismiss();
     });
   }
 
   ngOnInit(): void {
+    this.getContactType();
     if(this.id != null){
       this.modalTitle = "Editar Contato";
       this.contactService.byId(this.id).subscribe((data) => {
         this.contact = data.contact;
-        this.contactForm.patchValue({
-          id: this.contact.id,
-          contact_value: this.contact.contact_value,
-        });
+        this.contact.type = data.contact.type.id
       });
     }
   }
