@@ -1,0 +1,24 @@
+<h1>Lista de contatos</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let contact of contactList">
+            <td>
+                {{ contact.type.name }}
+            </td>
+            <td>
+                {{ contact.contact_value }}
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary" (click)="edit(contact.id)"><fa-icon [icon]="faPen"></fa-icon></button>
+                <button type="button" class="btn btn-danger" (click)="delete(contact.id)"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
+            </td>
+        </tr>
+    </tbody>
+  </table>

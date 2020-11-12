@@ -1,3 +1,6 @@
+<h1>Lista de pessoas</h1>
+
+<button type="button" class="btn btn-success" (click)="create()"><fa-icon [icon]="faPlusSquare"></fa-icon> Novo</button>
 
 <table class="table table-striped">
   <thead>
@@ -14,11 +17,11 @@
     <td>
       {{ person.name }}
     </td>
-    <td>
+    <td (click)="contacts(person.id)">
         {{ person.contacts.length }}
     </td>
     <td>
-        <button type="button" class="btn btn-primary" (click)="getById(person.id)"><fa-icon [icon]="faPen"></fa-icon></button>
+        <button type="button" class="btn btn-primary" (click)="edit(person.id)"><fa-icon [icon]="faPen"></fa-icon></button>
         <button type="button" class="btn btn-danger" (click)="delete(person.id)"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
     </td>
   </tr>

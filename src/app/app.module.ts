@@ -7,18 +7,22 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import { PeopleListComponent } from './people-list/people-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-import { PeopleCreateComponent } from './people-create/people-create.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BalancedBracketsComponent } from './balanced-brackets/balanced-brackets.component';
+import { PeopleCreateModalContent } from './people-create-modal/people-create-modal.component';
+import { ContactListComponent } from './contact-list/contact-list.component';
+import { ContactCreateModalContent } from './contact-create-modal/contact-create-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
     PeopleListComponent,
-    PeopleCreateComponent,
-    BalancedBracketsComponent
+    BalancedBracketsComponent,
+    PeopleCreateModalContent,
+    ContactListComponent,
+    ContactCreateModalContent
   ],
   imports: [
     BrowserModule,

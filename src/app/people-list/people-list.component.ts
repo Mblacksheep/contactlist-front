@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import { PeopleService } from '../services/people.service';
-import { faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faPen, faPlusSquare} from '@fortawesome/free-solid-svg-icons';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PeopleCreateModalContent } from '../people-create-modal/people-create-modal.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-people-list',
@@ -13,21 +15,41 @@ export class PeopleListComponent implements OnInit {
   peopleList = [];
   faTrashAlt = faTrashAlt;
   faPen = faPen;
+  faPlusSquare = faPlusSquare;
 
-  constructor(private peopleService: PeopleService, private router: Router) { }
+  constructor(
+    private peopleService: PeopleService,
+    private modalService: NgbModal,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getAll();
   }
 
-  getById(id) {
-    this.router.navigate(["/people/create", { id:id }]);
+  create() {
+    const modalRef = this.modalService.open(PeopleCreateModalContent);
+    modalRef.dismissed.subscribe(() => {
+      this.getAll();
+    })
   }
 
-  getAll() {
+  edit(id) {
+    const modalRef = this.modalService.open(PeopleCreateModalContent);
+    modalRef.componentInstance.id = id;
+    modalRef.dismissed.subscribe(() => {
+      this.getAll();
+    })
+  }
+
+  contacts(id) {
+    this.router.navigate(['/contacts/list',  {id: id}]);
+  }
+
+  getAll(){
     this.peopleService.all().subscribe((data) => {
       this.peopleList = data.peopleList;
     })
+    return true;
   }
 
   delete(id) {
