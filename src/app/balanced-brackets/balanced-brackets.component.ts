@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BalancedBracketsService } from '../services/balanced-brackets.service';
+import Swal from 'sweetalert2/src/sweetalert2.js';
 
 @Component({
   selector: 'app-balanced-brackets',
@@ -15,9 +16,18 @@ export class BalancedBracketsComponent implements OnInit {
 
   verify() {
     console.log(this.brackets);
-    
     this.balancedBracketsService.verify({"value": this.brackets.value}).subscribe((data) => {
-      console.log(data);
+      if(data.result) {
+        Swal.fire({
+          title: "String is valid!",
+          icon: "success",
+        });
+      } else {
+        Swal.fire({
+          title: "String is not valid!",
+          icon: "error",
+        });
+      }
     });
   }
 
