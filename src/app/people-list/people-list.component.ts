@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PeopleService } from '../services/people.service';
-import { faTrashAlt, faPen, faPlusSquare} from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faPen, faPlusSquare, faList } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PeopleCreateModalContent } from '../people-create-modal/people-create-modal.component';
 import { Router } from '@angular/router';
@@ -16,6 +16,7 @@ export class PeopleListComponent implements OnInit {
   faTrashAlt = faTrashAlt;
   faPen = faPen;
   faPlusSquare = faPlusSquare;
+  faList = faList;
 
   constructor(
     private peopleService: PeopleService,

@@ -1,1 +1,13 @@
-<p>balanced-brackets works!</p>
+<h1>Balanced Brackets</h1>
+<div class="container">
+    <form (ngSubmit)="verify()" #heroForm="ngForm">
+        <div class="form-group">
+            <input type="text" class="form-control" id="brackets" required [(ngModel)]="brackets.value" name="brackets" #value="ngModel">
+            <div [hidden]="value.valid || value.pristine"
+                class="alert alert-danger">
+                Name is required
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
+    </form>
+</div>

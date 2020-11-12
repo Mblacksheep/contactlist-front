@@ -9,21 +9,21 @@ import { PeopleService } from '../services/people.service';
 })
 export class PeopleCreateModalContent implements OnInit {
   @Input() id;
-  person;
+  person = { "id": null, "name": ''};
   personForm;
   modalTitle = "Criar Pessoa";
   
   constructor(
     public activeModal: NgbActiveModal,
     private peopleService: PeopleService) {
-    this.personForm = new FormGroup({
-      id: new FormControl(null),
-      name: new FormControl(null),
-    });
+    // this.personForm = new FormGroup({
+    //   id: new FormControl(null),
+    //   name: new FormControl(null),
+    // });
   }
 
-  onSubmit(person) {
-    this.peopleService.create(person).subscribe((data) => {
+  onSubmit() {
+    this.peopleService.create(this.person).subscribe((data) => {
       this.activeModal.dismiss();
     });
   }
@@ -33,10 +33,6 @@ export class PeopleCreateModalContent implements OnInit {
       this.modalTitle = "Editar Pessoa";
       this.peopleService.byId(this.id).subscribe((data) => {
         this.person = data.person;
-        this.personForm.patchValue({
-          id: this.person.id,
-          name: this.person.name,
-        });
       });
     }
   }
